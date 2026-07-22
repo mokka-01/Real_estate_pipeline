@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 data/raw/*.csv
 .env
+data/debug_incomplete_cards/
