@@ -73,18 +73,21 @@ def parse_listing(card) -> dict:
         el = card.select_one(selector)
         return el.get_text(strip=True) if el else None
 
-    def safe_href(selector):
-        if not selector:
-            return None
-        el = card.select_one(selector)
-        return el.get("href") if el else None
+    # Title and link both live inside the same anchor tag, but the exact
+    # attributes on that anchor differ between regular and promoted listing
+    # templates. Selecting the anchor itself (by its stable CSS class) and
+    # pulling both pieces from it works for both card types.
+    anchor = card.select_one(SELECTORS["title_link_anchor"])
+    link = anchor.get("href") if anchor else None
+    title_el = anchor.find("p") if anchor else None
+    title = title_el.get_text(strip=True) if title_el else None
 
     listing = {
-        "title": safe_text(SELECTORS["title"]),
+        "title": title,
         "address": safe_text(SELECTORS["address"]),
         "price_eur": safe_text(SELECTORS["price_main"]),
         "price_per_sqm_eur": safe_text(SELECTORS["price_per_sqm"]),
-        "link": safe_href(SELECTORS["link"]),
+        "link": link,
     }
     listing.update(parse_specs(card))
     return listing
@@ -106,7 +109,28 @@ def parse_page(html: str) -> list[dict]:
 
     logger.info(f"Found {len(visible_cards)} visible listing cards on page "
                 f"({len(all_cards)} total, {len(all_cards) - len(visible_cards)} hidden duplicates skipped)")
-    return [parse_listing(card) for card in visible_cards]
+
+    listings = []
+    debug_dir = Path("data/debug_incomplete_cards")
+    for i, card in enumerate(visible_cards):
+        listing = parse_listing(card)
+
+        # A listing with no title or no link is unusable data (can't dedupe,
+        # can't trace back to the source) — flag it loudly instead of letting
+        # it slip through as a silently incomplete row.
+        if not listing.get("title") or not listing.get("link"):
+            logger.warning(
+                f"Incomplete listing (missing title and/or link) — "
+                f"address={listing.get('address')!r}, price={listing.get('price_eur')!r}"
+            )
+            debug_dir.mkdir(parents=True, exist_ok=True)
+            debug_path = debug_dir / f"card_{i}.html"
+            debug_path.write_text(str(card), encoding="utf-8")
+            logger.warning(f"Saved raw HTML of this card to {debug_path} for inspection")
+
+        listings.append(listing)
+
+    return listings
 
 
 def save_to_csv(listings: list[dict], path: str):

@@ -22,14 +22,13 @@ HEADERS = {
 # CSS selectors confirmed by inspecting the real storia.ro HTML.
 SELECTORS = {
     "listing_card": "article",
-    "title": "p[data-cy='listing-item-title']",
+    # Both regular AND promoted ("VipAdvertCard") listings wrap their title
+    # in an <a> with this exact class — unlike data-cy attributes, which
+    # promoted listings sometimes omit on the title/link elements.
+    "title_link_anchor": "a.text-foreground-action-primary.no-underline",
     "address": "p[data-cy='advert-card-address']",
     "price_main": "div[data-cy='listing-item-price'] span:nth-of-type(1)",
     "price_per_sqm": "div[data-cy='listing-item-price'] span:nth-of-type(2)",
-    "link": "a[data-cy='listing-item-link']",
-    # rooms / area / floor aren't directly selectable — all three <dd> values
-    # share the same CSS class. We match them to their <dt> label text instead
-    # (handled in scraper.py's parse_specs function).
     "specs_list": "dl",
 }
 
