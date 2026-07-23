@@ -4,3 +4,4 @@ pandas
 python-dotenv
 lxml
 psycopg2-binary
+prefect
