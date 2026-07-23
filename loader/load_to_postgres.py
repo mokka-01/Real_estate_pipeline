@@ -14,6 +14,7 @@ import logging
 import os
 
 import psycopg2
+from psycopg2.extras import execute_values
 from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -38,8 +39,9 @@ CREATE TABLE IF NOT EXISTS raw_listings (
 
 INSERT_SQL = """
 INSERT INTO raw_listings (title, address, price_eur, price_per_sqm, rooms, area_sqm, floor, link)
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-ON CONFLICT (link) DO NOTHING;
+VALUES %s
+ON CONFLICT (link) DO NOTHING
+RETURNING id;
 """
 
 
@@ -61,40 +63,44 @@ def read_csv(path: str) -> list[dict]:
 
 
 def load_listings(conn, listings: list[dict]):
-    inserted = 0
-    skipped_duplicate = 0
     skipped_no_link = 0
+    valid_rows = []
 
-    with conn.cursor() as cur:
-        for row in listings:
-            if not row.get("link"):
-                skipped_no_link += 1
-                logger.warning(
-                    f"Skipping row with no link (incomplete scrape) — "
-                    f"address={row.get('address')!r}, price={row.get('price_eur')!r}"
-                )
-                continue
-
-            cur.execute(
-                INSERT_SQL,
-                (
-                    row.get("title"),
-                    row.get("address"),
-                    row.get("price_eur"),
-                    row.get("price_per_sqm_eur"),
-                    row.get("rooms"),
-                    row.get("area_sqm"),
-                    row.get("floor"),
-                    row.get("link"),
-                ),
+    for row in listings:
+        if not row.get("link"):
+            skipped_no_link += 1
+            logger.warning(
+                f"Skipping row with no link (incomplete scrape) — "
+                f"address={row.get('address')!r}, price={row.get('price_eur')!r}"
             )
-            # rowcount is 1 if inserted, 0 if the ON CONFLICT DO NOTHING skipped it
-            if cur.rowcount == 1:
-                inserted += 1
-            else:
-                skipped_duplicate += 1
+            continue
+
+        valid_rows.append((
+            row.get("title"),
+            row.get("address"),
+            row.get("price_eur"),
+            row.get("price_per_sqm_eur"),
+            row.get("rooms"),
+            row.get("area_sqm"),
+            row.get("floor"),
+            row.get("link"),
+        ))
+
+    inserted = 0
+    if valid_rows:
+        with conn.cursor() as cur:
+            # execute_values groups rows into batches of page_size, so a
+            # 2,000-row load becomes ~4 network round-trips instead of 2,000.
+            # fetch=True collects every RETURNING id across all batches,
+            # which tells us exactly how many rows were genuinely inserted
+            # (skipped-as-duplicate rows return no id at all).
+            inserted_ids = execute_values(
+                cur, INSERT_SQL, valid_rows, page_size=500, fetch=True
+            )
+            inserted = len(inserted_ids)
 
     conn.commit()
+    skipped_duplicate = len(valid_rows) - inserted
     return inserted, skipped_duplicate, skipped_no_link
 
 
