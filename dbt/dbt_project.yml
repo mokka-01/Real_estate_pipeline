@@ -1,0 +1,17 @@
+name: 'real_estate_pipeline'
+version: '1.0.0'
+config-version: 2
+
+# Must match the profile name in your ~/.dbt/profiles.yml
+profile: 'real_estate_pipeline'
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  real_estate_pipeline:
+    staging:
+      +materialized: view   # staging models are cheap views, not stored copies

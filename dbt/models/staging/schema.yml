@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_raw_listings
+    description: "Cleaned, properly-typed version of raw scraped listings."
+    columns:
+      - name: link
+        description: "Unique URL to the listing on storia.ro"
+        tests:
+          - not_null
+          - unique
+      - name: price_eur
+        description: "Listing price in EUR, parsed to a whole number"
