@@ -5,3 +5,7 @@ python-dotenv
 lxml
 psycopg2-binary
 prefect
+google-cloud-bigquery
+pyarrow
+db-dtypes
+pandas-gbq

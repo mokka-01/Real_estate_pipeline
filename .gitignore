@@ -4,3 +4,4 @@ __pycache__/
 data/raw/*.csv
 .env
 data/debug_incomplete_cards/
+gcp-service-account.json
