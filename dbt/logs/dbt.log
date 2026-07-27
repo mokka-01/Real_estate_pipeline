@@ -344,3 +344,128 @@ having count(*) > 1
 [0m16:25:51.233350 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002087A423450>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002087A226090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002087A2FD4D0>]}
 [0m16:25:51.234367 [debug] [MainThread]: Flushing usage events
 [0m16:25:52.084380 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m00:16:32.341010 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CBE5C34D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CBE5C33D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CBE5C3DD0>]}
+
+
+============================== 00:16:32.349001 | be529e6c-4bc1-4dc2-87c5-69e66dc5e648 ==============================
+[0m00:16:32.349001 [info ] [MainThread]: Running with dbt=1.12.0
+[0m00:16:32.351001 [debug] [MainThread]: running dbt with arguments {'maximum_seed_size_mib': '1', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\Mokatea\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'hints_enabled': 'True', 'invocation_command': 'dbt run', 'use_experimental_parser': 'False', 'indirect_selection': 'eager', 'log_path': 'D:\\work\\Projects\\Real_estate_pipeline-main\\Real_estate_pipeline-main\\real_estate_pipeline\\dbt\\logs'}
+[0m00:16:37.334010 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC7C0EC10>]}
+[0m00:16:37.437009 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CB99A1990>]}
+[0m00:16:37.439007 [info ] [MainThread]: Registered adapter: bigquery=1.12.0
+[0m00:16:38.243010 [debug] [MainThread]: checksum: 7ddf5e1cf9ea5de0173363def0d2ed6aff466c1385829fb070b592369732a12e, vars: {}, profile: real_estate_pipeline, target: dev, version: 1.12.0
+[0m00:16:40.124001 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m00:16:40.125000 [debug] [MainThread]: Partial parsing: updated file: real_estate_pipeline://models\staging\stg_raw_listings.sql
+[0m00:16:41.195015 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC9318D50>]}
+[0m00:16:41.313015 [debug] [MainThread]: Wrote artifact WritableManifest to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\manifest.json
+[0m00:16:41.333017 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\semantic_manifest.json
+[0m00:16:41.382642 [debug] [MainThread]: Wrote artifact OsiDocument to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\osi_document.json
+[0m00:16:41.405654 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC971AF90>]}
+[0m00:16:41.406652 [info ] [MainThread]: Found 1 model, 2 data tests, 561 macros
+[0m00:16:41.407648 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC942FA10>]}
+[0m00:16:41.409642 [info ] [MainThread]: 
+[0m00:16:41.410653 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m00:16:41.411649 [info ] [MainThread]: 
+[0m00:16:41.412632 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m00:16:41.414633 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_real-estate-pipeline-503510'
+[0m00:16:41.415650 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:16:42.628632 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_real-estate-pipeline-503510_real_estate'
+[0m00:16:42.628632 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m00:16:43.750641 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC919AD90>]}
+[0m00:16:43.751675 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m00:16:43.798633 [debug] [Thread-3 (]: Began running node model.real_estate_pipeline.stg_raw_listings
+[0m00:16:43.799634 [info ] [Thread-3 (]: 1 of 1 START sql view model real_estate.stg_raw_listings ....................... [RUN]
+[0m00:16:43.800633 [debug] [Thread-3 (]: Acquiring new bigquery connection 'model.real_estate_pipeline.stg_raw_listings'
+[0m00:16:43.801633 [debug] [Thread-3 (]: Began compiling node model.real_estate_pipeline.stg_raw_listings
+[0m00:16:43.811633 [debug] [Thread-3 (]: Writing injected SQL for node "model.real_estate_pipeline.stg_raw_listings"
+[0m00:16:43.812646 [debug] [Thread-3 (]: Began executing node model.real_estate_pipeline.stg_raw_listings
+[0m00:16:43.856660 [debug] [Thread-3 (]: Writing runtime sql for node "model.real_estate_pipeline.stg_raw_listings"
+[0m00:16:43.858633 [debug] [Thread-3 (]: On model.real_estate_pipeline.stg_raw_listings: /* {"app": "dbt", "dbt_version": "1.12.0", "profile_name": "real_estate_pipeline", "target_name": "dev", "node_id": "model.real_estate_pipeline.stg_raw_listings"} */
+
+
+  create or replace view `real-estate-pipeline-503510`.`real_estate`.`stg_raw_listings`
+  OPTIONS()
+  as -- Cleans raw scraped listing data into proper types.
+-- Source: raw_listings (loaded as-is from Postgres, untouched, still there
+-- if this logic ever needs to change and be re-run).
+
+with source as (
+    select * from `real-estate-pipeline-503510`.`real_estate`.raw_listings
+)
+
+select
+    id,
+    title,
+    address,
+    link,
+    scraped_at,
+
+    -- Price format from source: "128 990 €" (space thousands separator, no decimals)
+    -- Strip everything except digits, then cast to a whole number.
+    safe_cast(
+        regexp_replace(price_eur, r'[^0-9]', '')
+        as int64
+    ) as price_eur,
+
+    -- price_per_sqm format: "3307,44 €/m²" (comma as DECIMAL separator here,
+    -- unlike price_eur above -- a real inconsistency in the source data).
+    safe_cast(
+        regexp_replace(replace(price_per_sqm, ',', '.'), r'[^0-9.]', '')
+        as numeric
+    ) as price_per_sqm,
+
+    -- area_sqm format: "56.9 m²" (period decimal, already consistent -- no
+    -- comma-to-period conversion needed here, unlike price_per_sqm above).
+    safe_cast(
+        regexp_replace(area_sqm, r'[^0-9.]', '')
+        as numeric
+    ) as area_sqm,
+
+    -- rooms format: "2 camere" / "1 cameră" -- extract the leading digit.
+    safe_cast(
+        regexp_extract(rooms, r'^(\d+)')
+        as int64
+    ) as room_count,
+
+    -- floor format: "etajul 10" (extract digit) OR "parter" (ground floor,
+    -- non-numeric -- a real edge case worth handling explicitly rather than
+    -- letting it silently become NULL).
+    case
+        when lower(floor) = 'parter' then 0
+        else safe_cast(regexp_extract(floor, r'(\d+)') as int64)
+    end as floor_number,
+     -- extract sector number from address, e.g. "Sectorul 3, Bucuresti" -> 3
+    safe_cast(
+        regexp_extract(address, r'Sectorul (\d+)')
+        as int64
+    ) as sector
+
+from source;
+
+
+[0m00:16:43.859633 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m00:16:45.366651 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=real-estate-pipeline-503510&j=bq:europe-west3:0088c627-8f75-4076-8c17-a5d77caa64a3&page=queryresults
+[0m00:16:45.742666 [debug] [Thread-3 (]: SQL status: OK in 0.374 seconds
+[0m00:16:49.487634 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'be529e6c-4bc1-4dc2-87c5-69e66dc5e648', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC95DDD10>]}
+[0m00:16:49.488633 [info ] [Thread-3 (]: 1 of 1 OK created sql view model real_estate.stg_raw_listings .................. [[32mCREATE VIEW (0 processed)[0m in 5.68s]
+[0m00:16:49.490633 [debug] [Thread-3 (]: Finished running node model.real_estate_pipeline.stg_raw_listings
+[0m00:16:49.493633 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m00:16:49.539632 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m00:16:49.541636 [debug] [MainThread]: Connection 'list_real-estate-pipeline-503510' was properly closed.
+[0m00:16:49.541636 [debug] [MainThread]: Connection 'list_real-estate-pipeline-503510_real_estate' was properly closed.
+[0m00:16:49.542634 [debug] [MainThread]: Connection 'model.real_estate_pipeline.stg_raw_listings' was properly closed.
+[0m00:16:49.542634 [info ] [MainThread]: 
+[0m00:16:49.543633 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 8.13 seconds (8.13s).
+[0m00:16:49.544633 [debug] [MainThread]: Command end result
+[0m00:16:49.599631 [debug] [MainThread]: Wrote artifact WritableManifest to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\manifest.json
+[0m00:16:49.603632 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\semantic_manifest.json
+[0m00:16:49.607633 [debug] [MainThread]: Wrote artifact OsiDocument to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\osi_document.json
+[0m00:16:49.616633 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\work\Projects\Real_estate_pipeline-main\Real_estate_pipeline-main\real_estate_pipeline\dbt\target\run_results.json
+[0m00:16:49.617633 [info ] [MainThread]: 
+[0m00:16:49.618633 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m00:16:49.619649 [info ] [MainThread]: 
+[0m00:16:49.619649 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=1
+[0m00:16:49.621632 [debug] [MainThread]: Command `dbt run` succeeded at 00:16:49.621632 after 17.47 seconds
+[0m00:16:49.621632 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CBE3F9610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CBE49D510>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000023CC9CF2850>]}
+[0m00:16:49.622632 [debug] [MainThread]: Flushing usage events
+[0m00:16:50.398642 [debug] [MainThread]: An error was encountered while trying to flush usage events

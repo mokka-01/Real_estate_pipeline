@@ -50,7 +50,12 @@ select
     case
         when lower(floor) = 'parter' then 0
         else safe_cast(regexp_extract(floor, r'(\d+)') as int64)
-    end as floor_number
+    end as floor_number,
+     -- extract sector number from address, e.g. "Sectorul 3, Bucuresti" -> 3
+    safe_cast(
+        regexp_extract(address, r'Sectorul (\d+)')
+        as int64
+    ) as sector
 
 from source;
 
